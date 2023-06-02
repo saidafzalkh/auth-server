@@ -57,7 +57,12 @@ export class AuthService {
     if (!passwordMatches) throw new ForbiddenException('Wrong password!');
 
     const token = await this.signToken(user.id, user.email);
+    const date = new Date().toISOString();
     delete user.hash;
+    this.prisma.user.update({
+      where: { id: user.id },
+      data: { loggedAt: date },
+    });
     return { ...token, user };
   }
 
