@@ -9,6 +9,7 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  await app.listen(process.env.PORT || 3000);
+  console.log('started on ' + process.env.PORT);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
